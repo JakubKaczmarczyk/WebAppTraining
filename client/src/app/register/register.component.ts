@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-register',
@@ -11,12 +12,18 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class RegisterComponent {
-  @Input() usersFromHomeComponent: any;
   @Output() calcelRegister = new EventEmitter();
   model: any = {}
 
+  constructor(private acconutService: AccountService) { }
+
   register() {
-    console.log(this.model);
+    this.acconutService.register(this.model).subscribe({
+      next: () => {
+        this.cancel();
+      },
+      error: error => console.log(error)
+    })
   }
 
   cancel() {
