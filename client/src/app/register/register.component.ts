@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AccountService } from '../_services/account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -15,14 +16,16 @@ export class RegisterComponent {
   @Output() calcelRegister = new EventEmitter();
   model: any = {}
 
-  constructor(private acconutService: AccountService) { }
+  constructor(private acconutService: AccountService, private toaster: ToastrService) { }
 
   register() {
     this.acconutService.register(this.model).subscribe({
       next: () => {
         this.cancel();
       },
-      error: error => console.log(error)
+      error: error => {
+        this.toaster.error(error.error)
+      }
     })
   }
 
