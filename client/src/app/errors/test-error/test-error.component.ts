@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-test-error',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './test-error.component.html',
   styleUrl: './test-error.component.css'
 })
 export class TestErrorComponent {
   baseUrl = 'https://localhost:5001/api/';
+  validationErros: string[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -44,7 +46,10 @@ export class TestErrorComponent {
   get400ValidationError() {
     this.http.post(this.baseUrl + 'account/register', {}).subscribe({
       next: response => console.log(response),
-      error: error => console.log(error)
+      error: error => {
+        console.log(error);
+        this.validationErros = error;
+      }
     })
   }
 }
