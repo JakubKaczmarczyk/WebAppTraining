@@ -24,7 +24,6 @@ public class UsersController : BaseApiController
         _mapper = mapper;
     }
 
-    [AllowAnonymous]
     [HttpGet] // GET /api/users
     public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
     {
