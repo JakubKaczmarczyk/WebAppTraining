@@ -24,7 +24,7 @@ public class AppUser
     public string Interests { get; set; }
     public string City { get; set; }
     public string Country { get; set; }
-    public List<Photo> Photos { get; set; } = new List<Photo>();
+    public List<UserPhoto> Photos { get; set; } = new List<UserPhoto>();
 
     // public int GetAge()
     // {

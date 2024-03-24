@@ -1,4 +1,5 @@
 ﻿using System;
+using API.Controllers;
 using API.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,4 +12,5 @@ public class DataContext : DbContext
     }
 
     public DbSet<AppUser> Users { get; set; }
+    public DbSet<Ad> Ads { get; set; }
 }
