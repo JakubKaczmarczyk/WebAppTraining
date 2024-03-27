@@ -28,9 +28,18 @@ public class AdRepository : IAdRepository
         return await _context.Ads.FindAsync(id);
     }
 
-    public async Task<IEnumerable<Ad>> GetAdsAsync()
+    public async Task<IEnumerable<AdDto>> GetAdsAsync()
     {
-        return await _context.Ads.Include(p => p.Photos).ToListAsync();
+        return await _context.Ads
+            .ProjectTo<AdDto>(_mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
+    public async Task<IEnumerable<AdDto>> GetAdsByUserId(int id)
+    {
+        return await _context.Ads
+            .Where(x => x.AppUserId == id)
+            .ProjectTo<AdDto>(_mapper.ConfigurationProvider)
+            .ToListAsync();
     }
 
     public async Task<bool> SaveAllAsync()

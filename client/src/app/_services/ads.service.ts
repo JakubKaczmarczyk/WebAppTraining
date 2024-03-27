@@ -15,7 +15,7 @@ export class AdsService {
 
   getAds() {
     if (this.ads.length > 0) return of(this.ads);
-    return this.http.get<Ad[]>(this.baseUrl + 'users').pipe(
+    return this.http.get<Ad[]>(this.baseUrl + 'ads').pipe(
       map(ads => {
         this.ads = ads;
         return ads;

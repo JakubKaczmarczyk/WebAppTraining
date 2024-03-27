@@ -16,6 +16,17 @@
                 "Url": "https://randomuser.me/api/portraits/women/59.jpg",
                 "IsMain": true
             }
+        ],
+        "Ads": [
+            {
+                "Description": "lorem ipsum1",
+                "Photos": [
+                    {
+                        "Url": "https://randomuser.me/api/portraits/women/59.jpg",
+                        "IsMain": true
+                    }
+                ]
+            }
         ]
     },
     {
@@ -34,6 +45,17 @@
             {
                 "Url": "https://randomuser.me/api/portraits/women/84.jpg",
                 "IsMain": true
+            }
+        ],
+        "Ads": [
+            {
+                "Description": "lorem ipsum2",
+                "Photos": [
+                    {
+                        "Url": "https://randomuser.me/api/portraits/women/59.jpg",
+                        "IsMain": true
+                    }
+                ]
             }
         ]
     },
@@ -54,6 +76,26 @@
                 "Url": "https://randomuser.me/api/portraits/women/6.jpg",
                 "IsMain": true
             }
+        ],
+        "Ads": [
+            {
+                "Description": "lorem ipsum3",
+                "Photos": [
+                    {
+                        "Url": "https://randomuser.me/api/portraits/women/59.jpg",
+                        "IsMain": true
+                    }
+                ]
+            },
+            {
+                "Description": "lorem ipsum4",
+                "Photos": [
+                    {
+                        "Url": "https://randomuser.me/api/portraits/women/59.jpg",
+                        "IsMain": true
+                    }
+                ]
+            }
         ]
     },
     {
@@ -72,6 +114,17 @@
             {
                 "Url": "https://randomuser.me/api/portraits/women/86.jpg",
                 "IsMain": true
+            }
+        ],
+        "Ads": [
+            {
+                "Description": "lorem ipsum5",
+                "Photos": [
+                    {
+                        "Url": "https://randomuser.me/api/portraits/women/59.jpg",
+                        "IsMain": true
+                    }
+                ]
             }
         ]
     },
@@ -92,7 +145,8 @@
                 "Url": "https://randomuser.me/api/portraits/women/39.jpg",
                 "IsMain": true
             }
-        ]
+        ],
+        "Ads": []
     },
     {
         "UserName": "Perez",
@@ -111,7 +165,8 @@
                 "Url": "https://randomuser.me/api/portraits/men/77.jpg",
                 "IsMain": true
             }
-        ]
+        ],
+        "Ads": []
     },
     {
         "UserName": "Cummings",
@@ -130,7 +185,8 @@
                 "Url": "https://randomuser.me/api/portraits/men/63.jpg",
                 "IsMain": true
             }
-        ]
+        ],
+        "Ads": []
     },
     {
         "UserName": "Cervantes",
@@ -149,7 +205,8 @@
                 "Url": "https://randomuser.me/api/portraits/men/11.jpg",
                 "IsMain": true
             }
-        ]
+        ],
+        "Ads": []
     },
     {
         "UserName": "Franklin",
@@ -168,7 +225,8 @@
                 "Url": "https://randomuser.me/api/portraits/men/89.jpg",
                 "IsMain": true
             }
-        ]
+        ],
+        "Ads": []
     },
     {
         "UserName": "Cochran",
@@ -187,6 +245,7 @@
                 "Url": "https://randomuser.me/api/portraits/men/45.jpg",
                 "IsMain": true
             }
-        ]
+        ],
+        "Ads": []
     }
 ]

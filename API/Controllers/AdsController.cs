@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
@@ -10,13 +11,19 @@ namespace API.Controllers;
 
 public class AdsController : BaseApiController
 {
-    private readonly IAdRepository _AdRepository;
+    private readonly IAdRepository _adRepository;
     private readonly IMapper _mapper;
 
-    [HttpGet] // GET /api/ads
-    public async Task<ActionResult<IEnumerable<Ad>>> GetAds()
+    public AdsController(IAdRepository adRepository, IMapper mapper)
     {
-        List<Ad> ads = (List<Ad>)await _AdRepository.GetAdsAsync();
+        _adRepository = adRepository;
+        _mapper = mapper;
+    }
+
+    [HttpGet] // GET /api/ads
+    public async Task<ActionResult<IEnumerable<AdDto>>> GetAds()
+    {
+        List<AdDto> ads = (List<AdDto>)await _adRepository.GetAdsAsync();
         return ads;
     }
 
