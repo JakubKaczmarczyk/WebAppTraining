@@ -25,9 +25,5 @@ public class AppUser
     public string City { get; set; }
     public string Country { get; set; }
     public List<UserPhoto> Photos { get; set; } = new List<UserPhoto>();
-
-    // public int GetAge()
-    // {
-    //     return DateOfBirth.CalculateAge();
-    // }
+    public List<Ad> Ads { get; set; } = new List<Ad>();
 }

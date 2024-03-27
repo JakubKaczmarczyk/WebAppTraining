@@ -10,9 +10,8 @@ public class Ad
 {
     [Key]
     public int Id { get; set; }
-    // [ForeignKey]
-    public int UserId { get; set;}
     [Required]
+    public int AppUserId { get; set; }
     public DateTime Created { get; set; } = DateTime.UtcNow;
     public string Description { get; set; }
     public List<AdPhoto> Photos { get; set; } = new List<AdPhoto>();

@@ -11,5 +11,4 @@ public class AdPhoto
     public bool IsMain { get; set; }
     public string PublicId { get; set; }
     public int AdId { get; set; }
-    public Ad Ad { get; set; }
 }
