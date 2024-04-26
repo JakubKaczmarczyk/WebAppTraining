@@ -25,5 +25,6 @@ public class AppUser
     public string City { get; set; }
     public string Country { get; set; }
     public List<UserPhoto> Photos { get; set; } = new List<UserPhoto>();
-    public List<Ad> Ads { get; set; } = new List<Ad>();
+    public List<Ad> Ads { get; set; }
+    public List<UserFavAds> FavAds { get; set; }
 }
