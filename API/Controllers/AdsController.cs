@@ -37,7 +37,7 @@ public class AdsController : BaseApiController
         }
         else
         {
-            BadRequest("Failed to get add");
+            return BadRequest("Failed to get add");
         }
     }
 

@@ -23,7 +23,7 @@
                 "Description": "lorem ipsum1",
                 "Photos": [
                     {
-                        "Url": "https://randomuser.me/api/portraits/women/59.jpg",
+                        "Url": "",
                         "IsMain": true
                     }
                 ]
@@ -54,7 +54,7 @@
                 "Description": "lorem ipsum2",
                 "Photos": [
                     {
-                        "Url": "https://randomuser.me/api/portraits/women/59.jpg",
+                        "Url": "",
                         "IsMain": true
                     }
                 ]
@@ -85,7 +85,7 @@
                 "Description": "lorem ipsum3",
                 "Photos": [
                     {
-                        "Url": "https://randomuser.me/api/portraits/women/59.jpg",
+                        "Url": "",
                         "IsMain": true
                     }
                 ]
@@ -95,7 +95,7 @@
                 "Description": "lorem ipsum4",
                 "Photos": [
                     {
-                        "Url": "https://randomuser.me/api/portraits/women/59.jpg",
+                        "Url": "",
                         "IsMain": true
                     }
                 ]
@@ -126,7 +126,7 @@
                 "Description": "lorem ipsum5",
                 "Photos": [
                     {
-                        "Url": "https://randomuser.me/api/portraits/women/59.jpg",
+                        "Url": "",
                         "IsMain": true
                     }
                 ]

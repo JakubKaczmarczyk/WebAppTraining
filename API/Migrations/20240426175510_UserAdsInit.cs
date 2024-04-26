@@ -19,6 +19,7 @@ namespace API.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     AppUserId = table.Column<int>(type: "INTEGER", nullable: false),
                     Created = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Title = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>

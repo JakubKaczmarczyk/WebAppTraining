@@ -44,9 +44,10 @@ public class AdRepository : IAdRepository
 
     public async Task<AdDto> GetAdAsync(int id)
     {
-        return await _context.Ads.
+        return await _context.Ads
                .Where(ad => ad.Id == id)
-               .ProjectTo<AdDto>(_mapper.ConfigurationProvider);
+               .ProjectTo<AdDto>(_mapper.ConfigurationProvider)
+               .SingleOrDefaultAsync();
     }
 
     public async Task<bool> SaveAllAsync()
