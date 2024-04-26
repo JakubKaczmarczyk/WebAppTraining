@@ -6,6 +6,6 @@ export interface Ad {
     userId: number;
     title: string;
     created: Date;
-    descrition: string;
+    description: string;
     photos: Photo[];
 }

@@ -1,10 +1,10 @@
 <div class="card mb-4" *ngIf="ad">
     <div class="card-img-wrapper">
-        <img src="{{ad.photoUrl || './assets/user.png'}}" alt="text" class="card-img-top">
+        <img src="{{ad.photoUrl || './assets/ad.png'}}" alt="text" class="card-img-top">
         <ul class="list-inline member-icons animate text-center">
-            <!-- <li class="list-inline-item">
-                <button routerLink="/ads/{{member.userName}}" class="btn btn-primary"><i class="fa fa-user"></i></button>
-            </li> -->
+            <li class="list-inline-item">
+                <button routerLink="/ads/{{ad.id}}" class="btn btn-primary"><i class="fa fa-user"></i></button>
+            </li>
             <li class="list-inline-item">
                 <button class="btn btn-primary"><i class="fa fa-heart"></i></button>
             </li>
@@ -16,8 +16,8 @@
     <div class="card-body p-1">
         <h6 class="card-title text-center mb-1">
             <i class="fa fa-user me-2"></i>
-            {{ad?.descrition}}
+            {{ad.title}}
         </h6>
-        <p class="card-text text-muted text-center">{{ad?.descrition}}</p>
+        <p class="card-text text-muted text-center">{{ad.title}}</p>
     </div>
 </div>
