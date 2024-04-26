@@ -3,16 +3,19 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace API.Data.Migrations
+namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240426162353_UserAdsInit")]
+    partial class UserAdsInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
@@ -33,8 +36,6 @@ namespace API.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.ToTable("Ads");
                 });
@@ -115,6 +116,30 @@ namespace API.Data.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("API.Entities.UserFavAds", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("AdId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AppId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserFavAds");
+                });
+
             modelBuilder.Entity("API.Entities.UserPhoto", b =>
                 {
                     b.Property<int>("Id")
@@ -140,13 +165,19 @@ namespace API.Data.Migrations
                     b.ToTable("UserPhotos");
                 });
 
-            modelBuilder.Entity("API.Entities.Ad", b =>
+            modelBuilder.Entity("AdAppUser", b =>
                 {
-                    b.HasOne("API.Entities.AppUser", null)
-                        .WithMany("Ads")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("AdsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ObserversId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AdsId", "ObserversId");
+
+                    b.HasIndex("ObserversId");
+
+                    b.ToTable("AdAppUser");
                 });
 
             modelBuilder.Entity("API.Entities.AdPhoto", b =>
@@ -158,11 +189,43 @@ namespace API.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("API.Entities.UserFavAds", b =>
+                {
+                    b.HasOne("API.Entities.Ad", "Ad")
+                        .WithMany()
+                        .HasForeignKey("AdId");
+
+                    b.HasOne("API.Entities.AppUser", "User")
+                        .WithMany("FavAds")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ad");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("API.Entities.UserPhoto", b =>
                 {
                     b.HasOne("API.Entities.AppUser", null)
                         .WithMany("Photos")
                         .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AdAppUser", b =>
+                {
+                    b.HasOne("API.Entities.Ad", null)
+                        .WithMany()
+                        .HasForeignKey("AdsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("ObserversId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -174,7 +237,7 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
-                    b.Navigation("Ads");
+                    b.Navigation("FavAds");
 
                     b.Navigation("Photos");
                 });
