@@ -19,6 +19,7 @@
         ],
         "Ads": [
             {
+                "Title": "Ad 1",
                 "Description": "lorem ipsum1",
                 "Photos": [
                     {
@@ -49,6 +50,7 @@
         ],
         "Ads": [
             {
+                "Title": "Ad 2",
                 "Description": "lorem ipsum2",
                 "Photos": [
                     {
@@ -79,6 +81,7 @@
         ],
         "Ads": [
             {
+                "Title": "Ad 3",
                 "Description": "lorem ipsum3",
                 "Photos": [
                     {
@@ -88,6 +91,7 @@
                 ]
             },
             {
+                "Title": "Ad 4",
                 "Description": "lorem ipsum4",
                 "Photos": [
                     {
@@ -118,6 +122,7 @@
         ],
         "Ads": [
             {
+                "Title": "Ad 5",
                 "Description": "lorem ipsum5",
                 "Photos": [
                     {

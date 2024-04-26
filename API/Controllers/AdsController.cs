@@ -27,4 +27,18 @@ public class AdsController : BaseApiController
         return ads;
     }
 
+    [HttpGet("id")] // GET /api/ads/2
+    public async Task<ActionResult<AdDto>> GetAdd(string id)
+    {
+        int IntId;
+        if (int.TryParse(id, out IntId))
+        {
+            return await _adRepository.GetAdAsync(IntId);
+        }
+        else
+        {
+            BadRequest("Failed to get add");
+        }
+    }
+
 }

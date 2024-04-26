@@ -13,6 +13,7 @@ public class Ad
     public int AppUserId { get; set; }
     public List<AppUser> Observers { get; set; }
     public DateTime Created { get; set; } = DateTime.UtcNow;
+    public string Title { get; set; }
     public string Description { get; set; }
     public List<AdPhoto> Photos { get; set; } = new List<AdPhoto>();
 }
