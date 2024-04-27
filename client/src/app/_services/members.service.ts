@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Member } from '../_models/member';
 import { map, of } from 'rxjs';
+import { Ad } from '../_models/ad';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,9 @@ export class MembersService {
         this.members[index] = {...this.members[index], ...member}
       })
     )
+  }
+
+  getUserAds(userId: number) {
+    return this.http.get<Ad[]>(this.baseUrl + 'users/' + userId + '/ads');
   }
 }

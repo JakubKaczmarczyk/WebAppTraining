@@ -37,7 +37,7 @@ public class AdRepository : IAdRepository
     public async Task<IEnumerable<AdDto>> GetAdsByUserId(int id)
     {
         return await _context.Ads
-            // .Where(x => x.AppUserId == id)
+            .Where(x => x.AppUserId == id)
             .ProjectTo<AdDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
     }

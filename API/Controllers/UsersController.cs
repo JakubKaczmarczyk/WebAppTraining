@@ -17,11 +17,13 @@ namespace API.Controllers;
 public class UsersController : BaseApiController
 {
     private readonly IUserRepository _userRepository;
+    private readonly IAdRepository _adRepository;
     private readonly IMapper _mapper;
 
-    public UsersController(IUserRepository userRepository, IMapper mapper)
+    public UsersController(IUserRepository userRepository, IAdRepository adRepository, IMapper mapper)
     {
         _userRepository = userRepository;
+        _adRepository = adRepository;
         _mapper = mapper;
     }
 
@@ -36,6 +38,21 @@ public class UsersController : BaseApiController
     public async Task<ActionResult<MemberDto>> GetUser(string username)
     {
         return await _userRepository.GetMemberAsync(username);
+    }
+
+    [HttpGet("{userId}/ads")] // GET /api/users/1/ads
+    public async Task<ActionResult<IEnumerable<AdDto>>> GetAddsByUsername(string userId)
+    {
+        int IntuserId;
+        if (int.TryParse(userId, out IntuserId))
+        {
+            List<AdDto> ads = (List<AdDto>)await _adRepository.GetAdsByUserId(IntuserId);
+            return ads;
+        }
+        else
+        {
+            return BadRequest("Failed to get user's adds");
+        }
     }
 
     [HttpPut]
