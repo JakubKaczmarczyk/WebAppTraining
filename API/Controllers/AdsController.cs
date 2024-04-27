@@ -41,4 +41,21 @@ public class AdsController : BaseApiController
         }
     }
 
+    [HttpPost("uploadAd")] // POST: api/ads/uploadAd
+    public async Task<ActionResult> UploadAd(AdDto adDto)
+    {
+        Ad newAd = new Ad {
+            Id = adDto.Id,
+            AppUserId = adDto.UserId,
+            Created = DateTime.UtcNow,
+            Title = adDto.Title,
+            Description = adDto.Description
+        };
+
+        _adRepository.uploadAd(newAd);
+        if (await _adRepository.SaveAllAsync()) return NoContent();
+
+        return BadRequest("Failed to upload new Ad");
+    }
+
 }
