@@ -56,9 +56,11 @@ export class AdUploadComponent implements OnInit {
     }
   
     UploadAd() {
-      this.adsService.uploadAd(this.editForm?.value).subscribe({
+      this.ad.userId = this.member?.id;
+      this.adsService.uploadAd(this.ad).subscribe({
         next: _ => {
           this.toastr.success('Advert uploaded succesfully');
+          this.editForm?.reset(this.ad);
         }
       })
     }

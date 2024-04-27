@@ -45,7 +45,6 @@ public class AdsController : BaseApiController
     public async Task<ActionResult> UploadAd(AdDto adDto)
     {
         Ad newAd = new Ad {
-            Id = adDto.Id,
             AppUserId = adDto.UserId,
             Created = DateTime.UtcNow,
             Title = adDto.Title,
