@@ -12,6 +12,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { preventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { AdsListComponent } from './ads/ads-list/ads-list.component';
 import { AdDetailComponent } from './ads/ad-detail/ad-detail.component';
+import { AdUploadComponent } from './ads/ad-upload/ad-upload.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -25,7 +26,8 @@ export const routes: Routes = [
             {path: 'lists', component: ListsComponent},
             {path: 'messages', component: MessagesComponent},
             {path: 'ads', component: AdsListComponent},
-            {path: 'ads/:id', component: AdDetailComponent}
+            {path: 'ads/:id', component: AdDetailComponent},
+            {path: 'ads/upload', component: AdUploadComponent, canDeactivate: [preventUnsavedChangesGuard]}
         ]
     },
     {path: 'errors', component: TestErrorComponent},

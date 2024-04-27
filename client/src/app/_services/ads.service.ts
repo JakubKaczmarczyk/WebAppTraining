@@ -37,4 +37,14 @@ export class AdsService {
       })
     )
   }
+
+  uploadAd(ad: Ad) {
+    return this.http.post(this.baseUrl + 'ads', ad).pipe(
+      map(() => {
+        const index = this.ads.indexOf(ad);
+        this.ads[index] = {...this.ads[index], ...ad}
+      })
+    )
+
+  }
 }
