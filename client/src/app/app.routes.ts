@@ -14,6 +14,7 @@ import { AdsListComponent } from './ads/ads-list/ads-list.component';
 import { AdDetailComponent } from './ads/ad-detail/ad-detail.component';
 import { AdUploadComponent } from './ads/ad-upload/ad-upload.component';
 import { MyAdsListComponent } from './ads/my-ads-list/my-ads-list.component';
+import { FavAdsListComponent } from './ads/fav-ads-list/fav-ads-list.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -24,6 +25,7 @@ export const routes: Routes = [
             {path: 'members', component: MemberListComponent, canActivate: [authGuard]},
             {path: 'members/:username', component: MemberDetailComponent},
             {path: 'myAdds', component: MyAdsListComponent},
+            {path: 'myFavAds', component: FavAdsListComponent},
             {path: 'member/edit', component: MemberEditComponent, canDeactivate: [preventUnsavedChangesGuard]},
             {path: 'lists', component: ListsComponent},
             {path: 'messages', component: MessagesComponent},

@@ -13,6 +13,7 @@ public interface IAdRepository
     Task<IEnumerable<AdDto>> GetAdsAsync();
     Task<Ad> GetAdByIdAsync(int id);
     Task<IEnumerable<AdDto>> GetAdsByUserId(int id);
+    Task<IEnumerable<AdDto>> GetFavAdsByUserId(int id);
     Task<AdDto> GetAdAsync(int id);
     void uploadAd(Ad ad);
 }

@@ -64,4 +64,12 @@ public class AdRepository : IAdRepository
     {
         _context.Add(ad);
     }
+
+    public async Task<IEnumerable<AdDto>> GetFavAdsByUserId(int id)
+    {
+        return await _context.Ads
+        .Include(ad => ad.Observers.Where(observer => observer.Id == id))
+        .ProjectTo<AdDto>(_mapper.ConfigurationProvider)
+        .ToListAsync();
+    }
 }
