@@ -55,6 +55,21 @@ public class UsersController : BaseApiController
         }
     }
 
+    [HttpGet("{userId}/favourites")] // GET /api/users/1/ads
+    public async Task<ActionResult<IEnumerable<AdDto>>> GetFavAddsByUsername(string userId)
+    {
+        int IntuserId;
+        if (int.TryParse(userId, out IntuserId))
+        {
+            List<AdDto> ads = (List<AdDto>)await _adRepository.GetFavAdsByUserId(IntuserId);
+            return ads;
+        }
+        else
+        {
+            return BadRequest("Failed to get user's adds");
+        }
+    }
+
     [HttpPut]
     public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
     {

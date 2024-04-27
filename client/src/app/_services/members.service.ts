@@ -42,4 +42,8 @@ export class MembersService {
   getUserAds(userId: number) {
     return this.http.get<Ad[]>(this.baseUrl + 'users/' + userId + '/ads');
   }
+
+  getUserFavAds(userId: number) {
+    return this.http.get<Ad[]>(this.baseUrl + 'users/' + userId + '/favourites');
+  }
 }
