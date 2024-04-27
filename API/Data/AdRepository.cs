@@ -59,4 +59,10 @@ public class AdRepository : IAdRepository
     {
         _context.Entry(ad).State = EntityState.Modified;
     }
+
+    public void uploadAd(Ad ad)
+    {
+        _context.Add(ad);
+        _context.SaveChanges();
+    }
 }
