@@ -26,8 +26,8 @@ export const routes: Routes = [
             {path: 'lists', component: ListsComponent},
             {path: 'messages', component: MessagesComponent},
             {path: 'ads', component: AdsListComponent},
-            {path: 'ads/:id', component: AdDetailComponent},
-            {path: 'ads/upload', component: AdUploadComponent, canDeactivate: [preventUnsavedChangesGuard]}
+            {path: 'ads/upload', component: AdUploadComponent, canDeactivate: [preventUnsavedChangesGuard]},
+            {path: 'ads/:id', component: AdDetailComponent}
         ]
     },
     {path: 'errors', component: TestErrorComponent},
