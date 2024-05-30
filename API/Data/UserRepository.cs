@@ -31,6 +31,14 @@ public class UserRepository : IUserRepository
             .SingleOrDefaultAsync();
     }
 
+    public async Task<MemberDto> GetMemberByIdAsync(int userId)
+    {
+        return await _context.Users
+            .Where(x => x.Id == userId)
+            .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+            .SingleOrDefaultAsync();
+    }
+
     public async Task<IEnumerable<MemberDto>> GetMembersAsync()
     {
         return await _context.Users
