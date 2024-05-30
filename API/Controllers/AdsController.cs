@@ -12,11 +12,13 @@ namespace API.Controllers;
 public class AdsController : BaseApiController
 {
     private readonly IAdRepository _adRepository;
+    private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
-    public AdsController(IAdRepository adRepository, IMapper mapper)
+    public AdsController(IAdRepository adRepository, IUserRepository userRepository, IMapper mapper)
     {
         _adRepository = adRepository;
+        _userRepository = userRepository;
         _mapper = mapper;
     }
 
@@ -55,6 +57,16 @@ public class AdsController : BaseApiController
         if (await _adRepository.SaveAllAsync()) return NoContent();
 
         return BadRequest("Failed to upload new Ad");
+    }
+
+    [HttpPost("like/{id}/{username}")] // POST: api/ads/like/1/johnDoe
+    public async Task<ActionResult> LikeAd(int id, string username)
+    {
+        var ad = await _adRepository.GetAdAsync(id);
+        if (ad == null) return NotFound("Ad not found");
+        _adRepository.likeAd(ad, username);
+        if (await _userRepository.SaveAllAsync()) return NoContent();
+        return BadRequest("Failed to like ad");
     }
 
 }

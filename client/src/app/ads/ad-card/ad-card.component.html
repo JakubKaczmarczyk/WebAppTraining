@@ -6,7 +6,7 @@
                 <button routerLink="/ads/{{ad.id}}" class="btn btn-primary"><i class="fa fa-info"></i></button>
             </li>
             <li class="list-inline-item">
-                <button class="btn btn-primary"><i class="fa fa-heart"></i></button>
+                <button class="btn btn-primary" (click)="likeAd()"><i class="fa fa-heart"></i></button>
             </li>
             <li class="list-inline-item">
                 <button routerLink="/members/{{ad.userId}}" class="btn btn-primary"><i class="fa fa-user"></i></button>

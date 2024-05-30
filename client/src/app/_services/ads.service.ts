@@ -47,4 +47,9 @@ export class AdsService {
     )
 
   }
+
+  likeAd(ad: Ad, username: string) {
+    const url = `${this.baseUrl}ads/like/${ad.id}/${username}`;
+    return this.http.post(url, {});
+  }
 }
