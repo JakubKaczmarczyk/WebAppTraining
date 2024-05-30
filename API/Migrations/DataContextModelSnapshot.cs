@@ -37,7 +37,27 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AppUserId");
+
                     b.ToTable("Ads");
+                });
+
+            modelBuilder.Entity("API.Entities.AdFavorite", b =>
+                {
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AdId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AppUserId", "AdId");
+
+                    b.HasIndex("AdId");
+
+                    b.ToTable("AdFavorite");
                 });
 
             modelBuilder.Entity("API.Entities.AdPhoto", b =>
@@ -116,30 +136,6 @@ namespace API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("API.Entities.UserFavAds", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("AdId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AppId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserFavAds");
-                });
-
             modelBuilder.Entity("API.Entities.UserPhoto", b =>
                 {
                     b.Property<int>("Id")
@@ -165,19 +161,34 @@ namespace API.Migrations
                     b.ToTable("UserPhotos");
                 });
 
-            modelBuilder.Entity("AdAppUser", b =>
+            modelBuilder.Entity("API.Entities.Ad", b =>
                 {
-                    b.Property<int>("AdsId")
-                        .HasColumnType("INTEGER");
+                    b.HasOne("API.Entities.AppUser", "Author")
+                        .WithMany("Ads")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("ObserversId")
-                        .HasColumnType("INTEGER");
+                    b.Navigation("Author");
+                });
 
-                    b.HasKey("AdsId", "ObserversId");
+            modelBuilder.Entity("API.Entities.AdFavorite", b =>
+                {
+                    b.HasOne("API.Entities.Ad", "Ad")
+                        .WithMany("Favorites")
+                        .HasForeignKey("AdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasIndex("ObserversId");
+                    b.HasOne("API.Entities.AppUser", "AppUser")
+                        .WithMany("FavAds")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.ToTable("AdAppUser");
+                    b.Navigation("Ad");
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("API.Entities.AdPhoto", b =>
@@ -189,23 +200,6 @@ namespace API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("API.Entities.UserFavAds", b =>
-                {
-                    b.HasOne("API.Entities.Ad", "Ad")
-                        .WithMany()
-                        .HasForeignKey("AdId");
-
-                    b.HasOne("API.Entities.AppUser", "User")
-                        .WithMany("FavAds")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ad");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("API.Entities.UserPhoto", b =>
                 {
                     b.HasOne("API.Entities.AppUser", null)
@@ -215,28 +209,17 @@ namespace API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AdAppUser", b =>
-                {
-                    b.HasOne("API.Entities.Ad", null)
-                        .WithMany()
-                        .HasForeignKey("AdsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Entities.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("ObserversId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("API.Entities.Ad", b =>
                 {
+                    b.Navigation("Favorites");
+
                     b.Navigation("Photos");
                 });
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
+                    b.Navigation("Ads");
+
                     b.Navigation("FavAds");
 
                     b.Navigation("Photos");

@@ -16,4 +16,5 @@ public interface IAdRepository
     Task<IEnumerable<AdDto>> GetFavAdsByUserId(int id);
     Task<AdDto> GetAdAsync(int id);
     void uploadAd(Ad ad);
+    void likeAd(AdDto ad, string username);
 }

@@ -13,7 +13,6 @@ public class AppUser
     public string UserName { get; set;}
     public byte[] PasswordHash { get; set; }
     public byte[] PasswordSalt { get; set; }
-
     public DateOnly DateOfBirth { get; set; }
     public string KnownAs { get; set; }
     public DateTime Created { get; set; } = DateTime.UtcNow;
@@ -26,5 +25,6 @@ public class AppUser
     public string Country { get; set; }
     public List<UserPhoto> Photos { get; set; } = new List<UserPhoto>();
     public List<Ad> Ads { get; set; }
-    public List<UserFavAds> FavAds { get; set; }
+    public List<AdFavorite> FavAds { get; set; }
 }
+

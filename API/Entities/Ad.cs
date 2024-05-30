@@ -11,9 +11,10 @@ public class Ad
     [Key]
     public int Id { get; set; }
     public int AppUserId { get; set; }
-    public List<AppUser> Observers { get; set; }
+    public AppUser Author { get; set; }
     public DateTime Created { get; set; } = DateTime.UtcNow;
     public string Title { get; set; }
     public string Description { get; set; }
     public List<AdPhoto> Photos { get; set; } = new List<AdPhoto>();
+    public List<AdFavorite> Favorites { get; set; }
 }

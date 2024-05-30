@@ -65,11 +65,47 @@ public class AdRepository : IAdRepository
         _context.Add(ad);
     }
 
+    public void likeAd(AdDto ad, string username)
+    {
+        var user = _context.Users.Include(u => u.FavAds).FirstOrDefault(u => u.UserName == username);
+        if (user == null)
+        {
+            throw new ArgumentException("User does not exist"); 
+        }
+        if (user.FavAds == null)
+        {
+            user.FavAds = new List<AdFavorite>(); // Initialize with an empty list
+        }
+        if (user.FavAds.Any(af => af.AdId == ad.Id))
+        {
+            // Already liked, so unlike
+            user.FavAds.Remove(user.FavAds.FirstOrDefault(af => af.AdId == ad.Id));
+        }
+        else
+        {
+            // Not liked yet, so like it
+            user.FavAds.Add(new AdFavorite { AppUserId = user.Id, AdId = ad.Id });
+        }
+    }
+
     public async Task<IEnumerable<AdDto>> GetFavAdsByUserId(int id)
     {
-        return await _context.Ads
-        .Include(ad => ad.Observers.Where(observer => observer.Id == id))
-        .ProjectTo<AdDto>(_mapper.ConfigurationProvider)
-        .ToListAsync();
+        // Include necessary entities using eager loading
+        var user = await _context.Users
+            .Include(u => u.FavAds)
+            .ThenInclude(af => af.Ad)
+            .Where(u => u.Id == id)
+            .FirstOrDefaultAsync();
+
+        // Check if user exists
+        if (user == null)
+        {
+            return null; // Or throw an appropriate exception
+        }
+
+        // Map favorite ads to AdDto objects
+        var favAdsDto = user.FavAds.Select(af => _mapper.Map<AdDto>(af.Ad)).ToList();
+
+        return favAdsDto;
     }
 }
