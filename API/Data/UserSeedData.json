@@ -59,7 +59,8 @@
                     }
                 ]
             }
-        ]
+        ],
+        "FavAds": []
     },
     {
         "UserName": "Karina",
@@ -100,7 +101,8 @@
                     }
                 ]
             }
-        ]
+        ],
+        "FavAds": []
     },
     {
         "UserName": "Cassandra",
@@ -131,7 +133,8 @@
                     }
                 ]
             }
-        ]
+        ],
+        "FavAds": []
     },
     {
         "UserName": "Maude",
@@ -151,7 +154,8 @@
                 "IsMain": true
             }
         ],
-        "Ads": []
+        "Ads": [],
+        "FavAds": []
     },
     {
         "UserName": "Perez",
@@ -171,7 +175,8 @@
                 "IsMain": true
             }
         ],
-        "Ads": []
+        "Ads": [],
+        "FavAds": []
     },
     {
         "UserName": "Cummings",
@@ -191,7 +196,8 @@
                 "IsMain": true
             }
         ],
-        "Ads": []
+        "Ads": [],
+        "FavAds": []
     },
     {
         "UserName": "Cervantes",
@@ -211,7 +217,8 @@
                 "IsMain": true
             }
         ],
-        "Ads": []
+        "Ads": [],
+        "FavAds": []
     },
     {
         "UserName": "Franklin",
@@ -231,7 +238,8 @@
                 "IsMain": true
             }
         ],
-        "Ads": []
+        "Ads": [],
+        "FavAds": []
     },
     {
         "UserName": "Cochran",
@@ -251,6 +259,7 @@
                 "IsMain": true
             }
         ],
-        "Ads": []
+        "Ads": [],
+        "FavAds": []
     }
 ]

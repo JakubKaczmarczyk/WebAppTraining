@@ -37,7 +37,14 @@ public class UsersController : BaseApiController
     [HttpGet("{username}")] // GET /api/users/2
     public async Task<ActionResult<MemberDto>> GetUser(string username)
     {
-        return await _userRepository.GetMemberAsync(username);
+        if (int.TryParse(username, out int userId))
+        {
+            return await _userRepository.GetMemberByIdAsync(userId);
+        }
+        else
+        {
+            return await _userRepository.GetMemberAsync(username);
+        }
     }
 
     [HttpGet("{userId}/ads")] // GET /api/users/1/ads
