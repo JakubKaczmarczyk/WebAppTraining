@@ -33,7 +33,7 @@ public class AdsController : BaseApiController
         return ads;
     }
 
-    [HttpGet("id")] // GET /api/ads/2
+    [HttpGet("{id}")] // GET /api/ads/2
     public async Task<ActionResult<AdDto>> GetAdd(string id)
     {
         int IntId;
