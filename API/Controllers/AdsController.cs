@@ -14,12 +14,14 @@ public class AdsController : BaseApiController
     private readonly IAdRepository _adRepository;
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
+    private readonly IPhotoService _photoService;
 
-    public AdsController(IAdRepository adRepository, IUserRepository userRepository, IMapper mapper)
+    public AdsController(IAdRepository adRepository, IUserRepository userRepository, IMapper mapper, IPhotoService photoService)
     {
         _adRepository = adRepository;
         _userRepository = userRepository;
         _mapper = mapper;
+        _photoService = photoService;
     }
 
     [HttpGet] // GET /api/ads
@@ -68,5 +70,7 @@ public class AdsController : BaseApiController
         if (await _userRepository.SaveAllAsync()) return NoContent();
         return BadRequest("Failed to like ad");
     }
+
+    
 
 }
