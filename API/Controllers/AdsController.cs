@@ -107,7 +107,8 @@ public class AdsController : BaseApiController
         ad.Photos.Add(photo);
 
         if (await _adRepository.SaveAllAsync())
-            return CreatedAtAction(nameof(AddPhoto), ad);
+            return CreatedAtAction(nameof(AddPhoto), new {id = ad.Id},
+                _mapper.Map<PhotoDto>(photo));
 
         return BadRequest("Problem adding photo");
     }

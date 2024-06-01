@@ -32,16 +32,22 @@ export class MyAdsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadMember();
-    if (this.member) {
-      this.ads$ = this.memberService.getUserAds(this.member.id);
-    }
   }
 
   loadMember() {
     if (!this.user) return;
     this.memberService.getMember(this.user.username).subscribe({
-      next: member => this.member = member
+      next: member =>  {
+        this.member = member;
+        this.loadAds();
+      }
     })
+  }
+
+  loadAds() {
+    if (this.member) {
+      this.ads$ = this.memberService.getUserAds(this.member.id);
+    }
   }
 }
 

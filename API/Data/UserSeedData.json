@@ -23,7 +23,7 @@
                 "Description": "lorem ipsum1",
                 "Photos": [
                     {
-                        "Url": "",
+                        "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717254612/da-net7u/ohlhckkj4epphejya3s0.webp",
                         "IsMain": true
                     }
                 ]
@@ -54,7 +54,7 @@
                 "Description": "lorem ipsum2",
                 "Photos": [
                     {
-                        "Url": "",
+                        "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717255249/da-net7u/bndjrjktp3hj95ehnjb5.png",
                         "IsMain": true
                     }
                 ]
@@ -86,7 +86,7 @@
                 "Description": "lorem ipsum3",
                 "Photos": [
                     {
-                        "Url": "",
+                        "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717255609/da-net7u/kcklga7uu79dxilkjjof.png",
                         "IsMain": true
                     }
                 ]
@@ -96,7 +96,7 @@
                 "Description": "lorem ipsum4",
                 "Photos": [
                     {
-                        "Url": "",
+                        "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717255611/da-net7u/vjtfjfqgsamgli1nd5cr.png",
                         "IsMain": true
                     }
                 ]
@@ -128,7 +128,7 @@
                 "Description": "lorem ipsum5",
                 "Photos": [
                     {
-                        "Url": "",
+                        "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717255614/da-net7u/hrkrioeeljjcqxbj7qao.png",
                         "IsMain": true
                     }
                 ]
