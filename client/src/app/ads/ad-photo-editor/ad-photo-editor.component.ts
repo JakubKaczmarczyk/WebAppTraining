@@ -10,40 +10,36 @@ import { User } from '../../_models/user';
 import { CommonModule } from '@angular/common';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { Photo } from '../../_models/photo';
+import { AdsService } from '../../_services/ads.service';
+import { Ad } from '../../_models/ad';
 
 @Component({
-  selector: 'app-photo-editor',
+  selector: 'app-ad-photo-editor',
   standalone: true,
   imports: [ 
     CommonModule, 
     TabsModule,
     FileUploadModule ],
-  templateUrl: './photo-editor.component.html',
-  styleUrl: './photo-editor.component.css'
+  templateUrl: './ad-photo-editor.component.html',
+  styleUrl: './ad-photo-editor.component.css'
 })
-export class PhotoEditorComponent implements OnInit {
-  @Input() member: Member | undefined;
+export class AdPhotoEditorComponent implements OnInit {
+  @Input() ad: Ad | undefined;
   uploader: FileUploader | undefined;
   baseUrl = environment.apiUrl;
-  user: User | undefined;
   hasBaseDropzoneOver = false;
 
-  constructor(private accountService: AccountService, private memberService: MembersService) {
-    this.accountService.currentUser$.pipe(take(1)).subscribe({
-      next: user => {
-        if (user) this.user = user
-      }
-    })
+  constructor(private accountService: AccountService, private memberService: MembersService, private adsService: AdsService,) {
+
     this.uploader = new FileUploader({
-    url: this.baseUrl + 'users/add-photo',
-    authToken: 'Bearer ' + this.user?.token,
+    url: this.baseUrl + 'ads/add-photo',
     isHTML5: true,
     allowedFileType: ['image'],
     removeAfterUpload: true,
     autoUpload: false,
     maxFileSize: 10 * 1024 * 1024
     });
-
+  
   }
 
   ngOnInit(): void {
@@ -55,7 +51,7 @@ export class PhotoEditorComponent implements OnInit {
       this.uploader.onSuccessItem = (item, response, status, headers) => {
         if (response) {
           const photo = JSON.parse(response);
-          this.member?.photos.push(photo);
+          this.ad?.photos.push(photo);
         }
       }
     }
@@ -67,12 +63,12 @@ export class PhotoEditorComponent implements OnInit {
   }
 
   setMainPhoto(photo: Photo) {
-    this.memberService.setMainPhoto(photo.id).subscribe({
+    if (!this.ad) return;
+    this.adsService.setMainPhoto(this.ad, photo.id).subscribe({
       next: _ => {
-        if (this.user && this.member) {
-          this.accountService.setCurrentUser(this.user);
-          this.member.photoUrl = photo.url;
-          this.member.photos.forEach(p => {
+          if (this.ad) {
+          this.ad.photoUrl = photo.url;
+          this.ad.photos.forEach(p => {
             if (p.isMain) p.isMain = false;
             if (p.id === photo.id) p.isMain = true;
           })
@@ -82,13 +78,15 @@ export class PhotoEditorComponent implements OnInit {
   }
 
   deletePhoto(photoId: number) {
-    this.memberService.deletePhoto(photoId).subscribe({
+    if (!this.ad) return;
+    this.adsService.deletePhoto(this.ad, photoId).subscribe({
       next: _ => {
-        if (this.member) {
-          this.member.photos = this.member?.photos.filter(x => x.id !== photoId)
+        if (this.ad) {
+          this.ad.photos = this.ad?.photos.filter(x => x.id !== photoId)
         }
       }
     })
   }
 
 }
+

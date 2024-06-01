@@ -15,6 +15,7 @@ import { AdDetailComponent } from './ads/ad-detail/ad-detail.component';
 import { AdUploadComponent } from './ads/ad-upload/ad-upload.component';
 import { MyAdsListComponent } from './ads/my-ads-list/my-ads-list.component';
 import { FavAdsListComponent } from './ads/fav-ads-list/fav-ads-list.component';
+import { AdEditComponent } from './ads/ad-edit/ad-edit.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -31,7 +32,8 @@ export const routes: Routes = [
             {path: 'messages', component: MessagesComponent},
             {path: 'ads', component: AdsListComponent},
             {path: 'ads/upload', component: AdUploadComponent, canDeactivate: [preventUnsavedChangesGuard]},
-            {path: 'ads/:id', component: AdDetailComponent}
+            {path: 'ads/:id', component: AdDetailComponent},
+            {path: 'ads/edit/:id', component: AdEditComponent, canDeactivate: [preventUnsavedChangesGuard]}
         ]
     },
     {path: 'errors', component: TestErrorComponent},
