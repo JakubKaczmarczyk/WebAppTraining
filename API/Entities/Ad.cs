@@ -15,6 +15,8 @@ public class Ad
     public DateTime Created { get; set; } = DateTime.UtcNow;
     public string Title { get; set; }
     public string Description { get; set; }
+    public string Street { get; set; }
+    public string HomeNr { get; set; }
     public List<AdPhoto> Photos { get; set; } = new List<AdPhoto>();
     public List<AdFavorite> Favorites { get; set; }
 }
