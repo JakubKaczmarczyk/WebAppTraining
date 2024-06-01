@@ -47,7 +47,6 @@ export class AdEditComponent implements OnInit {
   ngOnInit(): void {
     var adId = this.route.snapshot.paramMap.get('id');
     if (!adId) return;
-    console.log("hehehehre1");
     var adIdNr = parseInt(adId);
     if (!adIdNr) return;
     this.adsService.getAd(adIdNr).subscribe({
@@ -56,8 +55,6 @@ export class AdEditComponent implements OnInit {
     })
     if (this.ad) {
       this.getImages();
-      console.log("hehehehre");
-      console.log(this.ad.id);
     }
     
   }
@@ -69,7 +66,6 @@ export class AdEditComponent implements OnInit {
       ...this.editForm.value,
       id: this.ad.id
     };
-    console.log(this.ad.id);
     this.adsService.updateAd(updatedAd).subscribe({
       next: _ => {
         this.toastr.success('Ad updated succesfully');
