@@ -26,12 +26,10 @@ export class AdsService {
   getAd(id: number) {
     const ad = this.ads.find(x => x.id == id);
     if (ad) return of(ad);
-    console.log("getting ad api");
     return this.http.get<Ad>(this.baseUrl + 'ads/' + id);
   }
 
   updateAd(ad: Ad) {
-    console.log(ad.id);
     return this.http.put(this.baseUrl + 'ads/updateAd', ad).pipe(
       map(() => {
         const index = this.ads.indexOf(ad);
