@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@augwit/ng2-file-upload": "^6.0.0",
-    "ng2-file-upload": "^5.0.0"
-  }
-}
