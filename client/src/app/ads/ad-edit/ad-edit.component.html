@@ -38,7 +38,7 @@
                     <textarea class="form-control" 
                         [(ngModel)]="ad.title" 
                         name="title"
-                        rows="6">
+                        rows="2">
                     </textarea>
                     <h4 class="mt-2">Description</h4>
                     <textarea class="form-control" 
@@ -48,9 +48,9 @@
                     </textarea>
                     <h4 class="mt-2">Location details</h4>
                     <div class="d-flex flex-row align-items-center">
-                        <label for="Street">City:</label>
+                        <label for="Street">Street:</label>
                         <input type="text" [(ngModel)]="ad.street" name="street" class="form-control mx-2">
-                        <label for="Nr">Country:</label>
+                        <label for="Nr">Nr:</label>
                         <input type="text" [(ngModel)]="ad.homeNr" name="homeNr" class="form-control mx-2">
                     </div>
                 </form>

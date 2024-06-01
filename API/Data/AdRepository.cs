@@ -25,7 +25,7 @@ public class AdRepository : IAdRepository
 
     public async Task<Ad> GetAdByIdAsync(int id)
     {
-        return await _context.Ads.FindAsync(id);
+        return await _context.Ads.Include(p => p.Photos).SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<IEnumerable<AdDto>> GetAdsAsync()
@@ -94,6 +94,7 @@ public class AdRepository : IAdRepository
         var user = await _context.Users
             .Include(u => u.FavAds)
             .ThenInclude(af => af.Ad)
+            .ThenInclude(ad => ad.Photos)
             .Where(u => u.Id == id)
             .FirstOrDefaultAsync();
 

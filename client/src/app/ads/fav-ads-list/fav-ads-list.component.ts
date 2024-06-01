@@ -32,16 +32,23 @@ export class FavAdsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadMember();
-    if (this.member) {
-      this.ads$ = this.memberService.getUserFavAds(this.member.id);
-    }
+    
   }
 
   loadMember() {
     if (!this.user) return;
     this.memberService.getMember(this.user.username).subscribe({
-      next: member => this.member = member
+      next: member => {
+        this.member = member;
+        this.loadFavAds();
+      }
     })
+  }
+
+  loadFavAds() {
+    if (this.member) {
+      this.ads$ = this.memberService.getUserFavAds(this.member.id);
+    }
   }
 }
 
