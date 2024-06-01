@@ -7,5 +7,7 @@ export interface Ad {
     title: string;
     created: Date;
     description: string;
+    street: string;
+    homeNr: string;
     photos: Photo[];
 }

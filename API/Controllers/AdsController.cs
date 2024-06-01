@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -61,6 +63,20 @@ public class AdsController : BaseApiController
         return BadRequest("Failed to upload new Ad");
     }
 
+    [HttpPut("updateAd")]
+    public async Task<ActionResult> UpdateAd(AdUpdateDto adUpdateDto)
+    {
+        var ad = await _adRepository.GetAdByIdAsync(adUpdateDto.Id);
+
+        if (ad == null) return NotFound();
+
+        _mapper.Map(adUpdateDto, ad);
+
+        if (await _adRepository.SaveAllAsync()) return NoContent();
+
+        return BadRequest("Failed to update ad");
+    }
+
     [HttpPost("like/{id}/{username}")] // POST: api/ads/like/1/johnDoe
     public async Task<ActionResult> LikeAd(int id, string username)
     {
@@ -71,6 +87,73 @@ public class AdsController : BaseApiController
         return BadRequest("Failed to like ad");
     }
 
-    
+    [HttpPost("add-photo/{id}")]
+    public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file, int id )
+    {
+        var ad = await _adRepository.GetAdByIdAsync(id);
+
+        var result = await _photoService.AddPhotoAsync(file);
+
+        if (result.Error != null) return BadRequest(result.Error.Message);
+
+        var photo = new AdPhoto
+        {
+            Url = result.SecureUrl.AbsoluteUri,
+            PublicId = result.PublicId
+        };
+
+        if (ad.Photos.Count == 0) photo.IsMain = true;
+
+        ad.Photos.Add(photo);
+
+        if (await _adRepository.SaveAllAsync())
+            return CreatedAtAction(nameof(AddPhoto), ad);
+
+        return BadRequest("Problem adding photo");
+    }
+
+    [HttpPut("set-main-photo/{addId}/{photoId}")]
+    public async Task<ActionResult> SetMainPhoto(int addId, int photoId)
+    {
+        var ad = await _adRepository.GetAdByIdAsync(addId);
+
+        var photo = ad.Photos.FirstOrDefault(x => x.Id == photoId);
+
+        if (photo == null) return NotFound();
+
+        if (photo.IsMain) return BadRequest("This is already your main photo");
+
+        var currentMain = ad.Photos.FirstOrDefault(x => x.IsMain);
+        if (currentMain != null) currentMain.IsMain = false;
+        photo.IsMain = true;
+
+        if (await _adRepository.SaveAllAsync()) return NoContent();
+
+        return BadRequest("Problem setting main photo");
+    }
+
+    [HttpDelete("delete-photo/{addId}/{photoId}")]
+    public async Task<ActionResult> DeletePhoto(int addId, int photoId)
+    {
+        var ad = await _adRepository.GetAdByIdAsync(addId);
+
+        var photo = ad.Photos.FirstOrDefault(x => x.Id == photoId);
+
+        if (photo == null) return NotFound();
+
+        if (photo.IsMain) return BadRequest("You cannot delete your main photo");
+
+        if (photo.PublicId != null)
+        {
+            var result = await _photoService.DeletePhotoAsync(photo.PublicId);
+            if (result.Error != null) return BadRequest(result.Error.Message);
+        }
+
+        ad.Photos.Remove(photo);
+
+        if (await _adRepository.SaveAllAsync()) return Ok();
+
+        return BadRequest("Problem deleting photo");
+    }
 
 }

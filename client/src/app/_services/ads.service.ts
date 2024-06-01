@@ -30,7 +30,7 @@ export class AdsService {
   }
 
   updateAd(ad: Ad) {
-    return this.http.put(this.baseUrl + 'ads', ad).pipe(
+    return this.http.put(this.baseUrl + 'ads/updateAd', ad).pipe(
       map(() => {
         const index = this.ads.indexOf(ad);
         this.ads[index] = {...this.ads[index], ...ad}
@@ -51,5 +51,13 @@ export class AdsService {
   likeAd(ad: Ad, username: string) {
     const url = `${this.baseUrl}ads/like/${ad.id}/${username}`;
     return this.http.post(url, {});
+  }
+
+  setMainPhoto(ad: Ad, photoId: number) {
+    return this.http.put(this.baseUrl + 'ads/set-main-photo/' + ad.id + "/" + photoId, {});
+  }
+
+  deletePhoto(ad: Ad, photoId: number) {
+    return this.http.delete(this.baseUrl + 'ads/delete-photo/' + ad.id + "/" + photoId);
   }
 }
