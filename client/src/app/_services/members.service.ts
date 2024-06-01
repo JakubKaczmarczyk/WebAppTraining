@@ -46,4 +46,12 @@ export class MembersService {
   getUserFavAds(userId: number) {
     return this.http.get<Ad[]>(this.baseUrl + 'users/' + userId + '/favourites');
   }
+
+  setMainPhoto(photoId: number) {
+    return this.http.put(this.baseUrl + 'users/set-main-photo/' + photoId, {});
+  }
+
+  deletePhoto(photoId: number) {
+    return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
+  }
 }
