@@ -26,6 +26,13 @@
                         "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717254612/da-net7u/ohlhckkj4epphejya3s0.webp",
                         "IsMain": true
                     }
+                ],
+                "Comments": [
+                    {
+                        "AppUserId": 1,
+                        "AdId": 1,
+                        "Text": "Bla Bla here is Ad nr 1"
+                    }
                 ]
             }
         ]
@@ -56,6 +63,13 @@
                     {
                         "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717255249/da-net7u/bndjrjktp3hj95ehnjb5.png",
                         "IsMain": true
+                    }
+                ],
+                "Comments": [
+                    {
+                        "AppUserId": 1,
+                        "AdId": 2,
+                        "Text": "Bla Bla here is Ad nr 2"
                     }
                 ]
             }
@@ -89,6 +103,13 @@
                         "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717255609/da-net7u/kcklga7uu79dxilkjjof.png",
                         "IsMain": true
                     }
+                ],
+                "Comments": [
+                    {
+                        "AppUserId": 1,
+                        "AdId": 3,
+                        "Text": "Bla Bla here is Ad nr 3"
+                    }
                 ]
             },
             {
@@ -98,6 +119,13 @@
                     {
                         "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717255611/da-net7u/vjtfjfqgsamgli1nd5cr.png",
                         "IsMain": true
+                    }
+                ],
+                "Comments": [
+                    {
+                        "AppUserId": 1,
+                        "AdId": 4,
+                        "Text": "Bla Bla here is Ad nr 4"
                     }
                 ]
             }
@@ -130,6 +158,13 @@
                     {
                         "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717255614/da-net7u/hrkrioeeljjcqxbj7qao.png",
                         "IsMain": true
+                    }
+                ],
+                "Comments": [
+                    {
+                        "AppUserId": 1,
+                        "AdId": 5,
+                        "Text": "Bla Bla here is Ad nr 5"
                     }
                 ]
             }

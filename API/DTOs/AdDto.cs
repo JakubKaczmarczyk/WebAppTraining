@@ -13,4 +13,5 @@ public class AdDto
     public string Street { get; set; }
     public string HomeNr { get; set; }
     public List<PhotoDto> Photos { get; set; }
+    public List<CommentDto> Comments { get; set; }
 }
