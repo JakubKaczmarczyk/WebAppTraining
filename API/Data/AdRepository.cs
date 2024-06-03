@@ -25,12 +25,13 @@ public class AdRepository : IAdRepository
 
     public async Task<Ad> GetAdByIdAsync(int id)
     {
-        return await _context.Ads.Include(p => p.Photos).SingleOrDefaultAsync(x => x.Id == id);
+        return await _context.Ads.Include(p => p.Photos).Include(c => c.Comments).SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<IEnumerable<AdDto>> GetAdsAsync()
     {
         return await _context.Ads
+            .Include(a => a.Comments)
             .ProjectTo<AdDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
     }
@@ -38,6 +39,7 @@ public class AdRepository : IAdRepository
     {
         return await _context.Ads
             .Where(x => x.AppUserId == id)
+            .Include(a => a.Comments)
             .ProjectTo<AdDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
     }
@@ -46,6 +48,7 @@ public class AdRepository : IAdRepository
     {
         return await _context.Ads
                .Where(ad => ad.Id == id)
+               .Include(a => a.Comments)
                .ProjectTo<AdDto>(_mapper.ConfigurationProvider)
                .SingleOrDefaultAsync();
     }
@@ -92,6 +95,9 @@ public class AdRepository : IAdRepository
     {
         // Include necessary entities using eager loading
         var user = await _context.Users
+            .Include(u => u.FavAds)
+            .ThenInclude(af => af.Ad)
+            .ThenInclude(ad => ad.Comments)
             .Include(u => u.FavAds)
             .ThenInclude(af => af.Ad)
             .ThenInclude(ad => ad.Photos)

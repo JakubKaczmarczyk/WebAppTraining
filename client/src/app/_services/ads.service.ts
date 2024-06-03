@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Ad } from '../_models/ad';
+import { Comment } from '../_models/comment';
 import { map, of } from 'rxjs';
 
 @Injectable({
@@ -51,6 +52,15 @@ export class AdsService {
   likeAd(ad: Ad, username: string) {
     const url = `${this.baseUrl}ads/like/${ad.id}/${username}`;
     return this.http.post(url, {});
+  }
+
+  commentAd(ad: Ad, comment: Comment) {
+    return this.http.post(this.baseUrl + 'ads/comment', comment).pipe(
+      map(() => {
+        const index = this.ads.indexOf(ad);
+        this.ads[index].comments = {...this.ads[index].comments, ...comment}
+      })
+    )
   }
 
   setMainPhoto(ad: Ad, photoId: number) {

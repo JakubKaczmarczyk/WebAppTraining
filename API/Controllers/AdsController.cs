@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -85,6 +86,29 @@ public class AdsController : BaseApiController
         _adRepository.likeAd(ad, username);
         if (await _userRepository.SaveAllAsync()) return NoContent();
         return BadRequest("Failed to like ad");
+    }
+
+    [HttpPost("comment")] // POST: api/ads/comment
+    public async Task<ActionResult> CommentAd(CommentDto commentDto)
+    {
+        var ad = await _adRepository.GetAdByIdAsync(commentDto.AdId);
+        if (ad == null) return NotFound("Ad not found");
+        var author = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+        if (author == null) return NotFound("Author not found");
+
+        var comment = new Comment {
+            AdId = commentDto.AdId,
+            AppUserId = author.Id,
+            Text = commentDto.Text
+        };
+        if (ad.Comments == null) {
+            ad.Comments = new List<Comment>();
+        }
+        ad.Comments.Add(comment);
+        if (await _adRepository.SaveAllAsync()) return
+            CreatedAtAction(nameof(CommentAd), new {id = ad.Id},
+            _mapper.Map<CommentDto>(comment));
+        return BadRequest("Failed to comment ad");
     }
 
     [HttpPost("add-photo/{id}")]

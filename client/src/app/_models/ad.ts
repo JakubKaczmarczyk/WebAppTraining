@@ -1,4 +1,5 @@
 import { Photo } from "./photo";
+import { Comment } from "./comment";
 
 export interface Ad {
     id: number;
@@ -10,4 +11,5 @@ export interface Ad {
     street: string;
     homeNr: string;
     photos: Photo[];
+    comments: Comment[];
 }

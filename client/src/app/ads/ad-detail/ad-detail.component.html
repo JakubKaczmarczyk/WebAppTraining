@@ -34,9 +34,28 @@
             <tab heading="Photos" #photoTab="tab">
                 <gallery *ngIf="photoTab.active" [items]="images" class="gallery"></gallery>
             </tab>
-            <!-- <tab heading="messages">
-                <p>Messages will go here</p>
-            </tab> -->
+            <tab heading="Comments">
+                <div *ngIf="ad.comments" >
+                    <div *ngFor="let comment of ad.comments">
+                        <app-ad-comment [comment]="comment"></app-ad-comment>
+                    </div>
+                    <form class="mb-3" #commentForm="ngForm" id="commentForm" (ngSubmit)="CommentAd()">
+                        <textarea class="form-control" 
+                            [(ngModel)]="newComment.text"
+                            name="newComment"
+                            rows="2"></textarea>
+                    </form>
+                    <button type="submit"
+                        [disabled]="!commentForm?.dirty" 
+                        form="commentForm" 
+                        class="btn btn-success">
+                        Comment
+                    </button>
+                    <div class="alert alert-info pb-0 mt-3" *ngIf="commentForm?.dirty">
+                        <p><strong>Information: </strong>You have started new comment. Any unsaved changes will be lost</p>
+                    </div>
+                </div>
+            </tab>
         </tabset>
     </div>
 </div>
