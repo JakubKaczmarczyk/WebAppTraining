@@ -98,7 +98,7 @@ public class AdsController : BaseApiController
 
         var comment = new Comment {
             AdId = commentDto.AdId,
-            AppUserId = author.Id,
+            AuthorUsername = author.UserName,
             Text = commentDto.Text
         };
         if (ad.Comments == null) {

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240603160759_adComments")]
+    [Migration("20240604180224_adComments")]
     partial class adComments
     {
         /// <inheritdoc />
@@ -154,8 +154,12 @@ namespace API.Migrations
                     b.Property<int>("AdId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AppUserId")
+                    b.Property<int?>("AuthorId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("AuthorUsername")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Text")
                         .HasColumnType("TEXT");
@@ -164,7 +168,7 @@ namespace API.Migrations
 
                     b.HasIndex("AdId");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Comment");
                 });
@@ -243,9 +247,7 @@ namespace API.Migrations
 
                     b.HasOne("API.Entities.AppUser", "Author")
                         .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AuthorId");
 
                     b.Navigation("Author");
 

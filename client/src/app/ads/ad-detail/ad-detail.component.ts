@@ -66,7 +66,9 @@ export class AdDetailComponent implements OnInit{
     this.adsService.commentAd(this.ad, this.newComment).subscribe({
       next: _ => {
         this.toastr.success('Comment added succesfully');
-        this.commentForm?.reset(this.newComment);
+        this.commentForm?.reset();
+        this.newComment.text = "";
+        this.loadAd();
       }
     })
   }

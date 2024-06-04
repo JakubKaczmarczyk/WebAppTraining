@@ -16,7 +16,8 @@ namespace API.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    AuthorUsername = table.Column<string>(type: "TEXT", nullable: false),
+                    AuthorId = table.Column<int>(type: "INTEGER", nullable: true),
                     AdId = table.Column<int>(type: "INTEGER", nullable: false),
                     Text = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -30,11 +31,10 @@ namespace API.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Comment_Users_AppUserId",
-                        column: x => x.AppUserId,
+                        name: "FK_Comment_Users_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -43,9 +43,9 @@ namespace API.Migrations
                 column: "AdId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comment_AppUserId",
+                name: "IX_Comment_AuthorId",
                 table: "Comment",
-                column: "AppUserId");
+                column: "AuthorId");
         }
 
         /// <inheritdoc />

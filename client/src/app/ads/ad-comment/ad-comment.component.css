@@ -1,0 +1,27 @@
+.comment-container {
+    border: 3px solid orange;
+    border-radius: 20px; /* Adjust for oval corners */
+    padding: 10px;
+    display: inline-block;
+}
+
+img.user-photo {
+    max-height: 50px;
+    border: 2px solid orange;
+    border-radius: 50%; /* Oval shape */
+    display: inline-block;
+    vertical-align: top; /* Align the photo with the top of the text */
+}
+
+.comment-details {
+    display: inline-block;
+    margin-left: 10px; /* Adjust as needed for spacing */
+    max-width: 800px; /* Adjust as needed for max width of text */
+    overflow-wrap: break-word;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 1.1em; /* Adjust as needed for size */
+    color: #333; /* Example color */
+}
