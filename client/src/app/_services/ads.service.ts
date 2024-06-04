@@ -57,8 +57,8 @@ export class AdsService {
   commentAd(ad: Ad, comment: Comment) {
     return this.http.post(this.baseUrl + 'ads/comment', comment).pipe(
       map(() => {
-        const index = this.ads.indexOf(ad);
-        this.ads[index].comments = {...this.ads[index].comments, ...comment}
+        ad.comments.push(comment);
+        // return ad.comments;
       })
     )
   }

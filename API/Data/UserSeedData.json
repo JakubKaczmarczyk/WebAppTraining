@@ -29,7 +29,7 @@
                 ],
                 "Comments": [
                     {
-                        "AppUserId": 1,
+                        "AuthorUsername": "Christian",
                         "AdId": 1,
                         "Text": "Bla Bla here is Ad nr 1"
                     }
@@ -67,7 +67,7 @@
                 ],
                 "Comments": [
                     {
-                        "AppUserId": 1,
+                        "AuthorUsername": "Christian",
                         "AdId": 2,
                         "Text": "Bla Bla here is Ad nr 2"
                     }
@@ -106,7 +106,7 @@
                 ],
                 "Comments": [
                     {
-                        "AppUserId": 1,
+                        "AuthorUsername": "Christian",
                         "AdId": 3,
                         "Text": "Bla Bla here is Ad nr 3"
                     }
@@ -123,7 +123,7 @@
                 ],
                 "Comments": [
                     {
-                        "AppUserId": 1,
+                        "AuthorUsername": "Christian",
                         "AdId": 4,
                         "Text": "Bla Bla here is Ad nr 4"
                     }
@@ -162,7 +162,7 @@
                 ],
                 "Comments": [
                     {
-                        "AppUserId": 1,
+                        "AuthorUsername": "Christian",
                         "AdId": 5,
                         "Text": "Bla Bla here is Ad nr 5"
                     }

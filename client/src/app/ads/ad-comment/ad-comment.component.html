@@ -1,3 +1,7 @@
-<div class="mb-3" *ngIf="comment" >
-    {{comment.text}}
+<div class="comment-container mb-3" *ngIf="comment && member">
+    <img src="{{member.photoUrl || './assets/user.png'}}" alt="user photo" class="user-photo">
+    <div class="comment-details">
+        <div class="username">{{comment.authorUsername}}</div>
+        <div class="comment-text">{{comment.text}}</div>
+    </div>
 </div>
