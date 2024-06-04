@@ -4,10 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
 import { Ad } from '../../_models/ad';
+import { Comment } from '../../_models/comment';
 import { AdsService } from '../../_services/ads.service';
 import { AdCommentComponent } from '../ad-comment/ad-comment.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { AccountService } from '../../_services/account.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-ad-detail',
@@ -23,6 +26,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AdDetailComponent implements OnInit{
   ad: Ad | undefined;
   images: GalleryItem[] = []
+  comments: Comment[] = [];
   newComment: any = {}
   @ViewChild('commentForm') commentForm: NgForm | undefined;
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
@@ -34,7 +38,12 @@ export class AdDetailComponent implements OnInit{
   constructor(
     private adsService: AdsService, 
     private route: ActivatedRoute, 
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private accountService: AccountService) {
+      this.accountService.currentUser$.pipe(take(1)).subscribe({
+        next: user => this.user = user
+      })
+    }
 
   ngOnInit(): void {
     this.loadAd();
@@ -48,6 +57,7 @@ export class AdDetailComponent implements OnInit{
       next: ad => {
         this.ad = ad,
         this.getImages()
+        this.getComments()
       }
     })
   }
@@ -59,16 +69,23 @@ export class AdDetailComponent implements OnInit{
     }
   }
 
+  getComments() {
+    if (!this.ad) return;
+    for (const comment of this.ad.comments) {
+      this.comments.push(comment);
+    }
+  }
+
   CommentAd() {
-    if (!this.ad || !this.commentForm || !this.newComment) return;
+    if (!this.ad || !this.commentForm || !this.newComment || !this.user) return;
 
     this.newComment.adId = this.ad.id;
     this.adsService.commentAd(this.ad, this.newComment).subscribe({
-      next: _ => {
+      next: newComment => {
         this.toastr.success('Comment added succesfully');
         this.commentForm?.reset();
         this.newComment.text = "";
-        this.loadAd();
+        this.comments.push(newComment);
       }
     })
   }
