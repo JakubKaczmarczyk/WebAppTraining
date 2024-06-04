@@ -36,7 +36,7 @@
             </tab>
             <tab heading="Comments">
                 <div *ngIf="ad.comments" >
-                    <div *ngFor="let comment of ad.comments">
+                    <div *ngFor="let comment of comments">
                         <app-ad-comment [comment]="comment"></app-ad-comment>
                     </div>
                     <form class="mb-3" #commentForm="ngForm" id="commentForm" (ngSubmit)="CommentAd()">

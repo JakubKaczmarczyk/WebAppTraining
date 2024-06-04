@@ -55,10 +55,11 @@ export class AdsService {
   }
 
   commentAd(ad: Ad, comment: Comment) {
-    return this.http.post(this.baseUrl + 'ads/comment', comment).pipe(
-      map(() => {
-        ad.comments.push(comment);
-        // return ad.comments;
+    return this.http.post<Comment>(this.baseUrl + 'ads/comment', comment).pipe(
+      map((response: Comment) => {
+        const newComment = response;
+        ad.comments.push(newComment);
+        return newComment;
       })
     )
   }

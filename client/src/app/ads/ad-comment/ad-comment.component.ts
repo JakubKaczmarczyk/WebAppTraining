@@ -23,9 +23,6 @@ export class AdCommentComponent implements OnInit{
 
   loadMember() {
     if (!this.comment) return;
-    console.log("jest user i jego nazwa:");
-    console.log(this.comment.authorUsername);
-    console.log(this.comment.text);
     this.memberService.getMember(this.comment.authorUsername).subscribe({
       next: member =>  {
         this.member = member;
