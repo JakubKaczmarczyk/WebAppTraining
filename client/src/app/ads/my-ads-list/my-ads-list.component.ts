@@ -18,7 +18,7 @@ import { AccountService } from '../../_services/account.service';
   styleUrl: './my-ads-list.component.css'
 })
 export class MyAdsListComponent implements OnInit {
-  ads$: Observable<Ad[]> | undefined;
+  ads: Ad[] = [];
   member: Member | null = null;
   user: User | null =null;
 
@@ -46,8 +46,14 @@ export class MyAdsListComponent implements OnInit {
 
   loadAds() {
     if (this.member) {
-      this.ads$ = this.memberService.getUserAds(this.member.id);
+      this.memberService.getUserAds(this.member.id).subscribe({
+        next: ads => this.ads = ads
+      });
     }
+  }
+
+  onAdDeleted(ad: Ad) {
+    this.ads = this.ads.filter(a => a.id !== ad.id);
   }
 }
 

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
 import { Ad } from '../../_models/ad';
@@ -11,6 +11,9 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../../_services/account.service';
 import { take } from 'rxjs';
+import { MembersService } from '../../_services/members.service';
+import { Member } from '../../_models/member';
+import { User } from '../../_models/user';
 
 @Component({
   selector: 'app-ad-detail',
@@ -19,15 +22,18 @@ import { take } from 'rxjs';
     TabsModule, 
     GalleryModule, 
     AdCommentComponent,
-    FormsModule],
+    FormsModule,
+    RouterModule],
   templateUrl: './ad-detail.component.html',
   styleUrl: './ad-detail.component.css'
 })
-export class AdDetailComponent implements OnInit{
+export class AdDetailComponent implements OnInit {
   ad: Ad | undefined;
   images: GalleryItem[] = []
   comments: Comment[] = [];
   newComment: any = {}
+  member: Member | null = null;
+  user: User | null =null;
   @ViewChild('commentForm') commentForm: NgForm | undefined;
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
     if (this.commentForm?.dirty) {
@@ -39,15 +45,17 @@ export class AdDetailComponent implements OnInit{
     private adsService: AdsService, 
     private route: ActivatedRoute, 
     private toastr: ToastrService,
-    private accountService: AccountService) {
+    private accountService: AccountService, 
+    private memberService: MembersService) {
       this.accountService.currentUser$.pipe(take(1)).subscribe({
-        next: user => this.user = user
-      })
-    }
+      next: user => this.user = user
+    })
+  }
 
   ngOnInit(): void {
     this.loadAd();
     this.newComment.text = "";
+    this.loadMember();
   }
 
   loadAd() {
@@ -77,7 +85,7 @@ export class AdDetailComponent implements OnInit{
   }
 
   CommentAd() {
-    if (!this.ad || !this.commentForm || !this.newComment || !this.user) return;
+    if (!this.ad || !this.commentForm || !this.newComment) return;
 
     this.newComment.adId = this.ad.id;
     this.adsService.commentAd(this.ad, this.newComment).subscribe({
@@ -89,4 +97,23 @@ export class AdDetailComponent implements OnInit{
       }
     })
   }
+  
+  loadMember() {
+    if (!this.user) return;
+    this.memberService.getMember(this.user.username).subscribe({
+      next: member => this.member = member
+    })
+  }
+
+  likeAd() {
+    if (!this.ad) return;
+    if (!this.member) return;
+    this.adsService.likeAd(this.ad, this.member.userName).subscribe({
+      next: _ => {
+        this.toastr.success('Advert liked succesfully');
+      }
+    })
+    
+  }
 }
+

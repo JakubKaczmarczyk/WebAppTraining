@@ -1,0 +1,16 @@
+.no-ads-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px; /* Adjust based on your design needs */
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #dee2e6; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the box */
+    margin: 20px; /* Margin outside the box */
+}
+
+.no-ads-message p {
+    margin-bottom: 15px; /* Space between text and button */
+}

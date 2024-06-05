@@ -23,7 +23,7 @@ export class AdCommentComponent implements OnInit{
 
   loadMember() {
     if (!this.comment) return;
-    this.memberService.getMember(this.comment.authorUsername).subscribe({
+    this.memberService.getMember(this.comment.authorUsername.toLocaleLowerCase()).subscribe({
       next: member =>  {
         this.member = member;
       }

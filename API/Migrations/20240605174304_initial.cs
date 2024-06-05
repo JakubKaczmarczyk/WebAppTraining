@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API.Migrations
 {
     /// <inheritdoc />
-    public partial class favadsfix : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,8 +28,8 @@ namespace API.Migrations
                     Introduction = table.Column<string>(type: "TEXT", nullable: true),
                     LookingFor = table.Column<string>(type: "TEXT", nullable: true),
                     Interests = table.Column<string>(type: "TEXT", nullable: true),
-                    City = table.Column<string>(type: "TEXT", nullable: true),
-                    Country = table.Column<string>(type: "TEXT", nullable: true)
+                    Street = table.Column<string>(type: "TEXT", nullable: true),
+                    HomeNr = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -45,7 +45,9 @@ namespace API.Migrations
                     AppUserId = table.Column<int>(type: "INTEGER", nullable: false),
                     Created = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Title = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true)
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Street = table.Column<string>(type: "TEXT", nullable: true),
+                    HomeNr = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -127,6 +129,33 @@ namespace API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Comment",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AuthorUsername = table.Column<string>(type: "TEXT", nullable: false),
+                    AuthorId = table.Column<int>(type: "INTEGER", nullable: true),
+                    AdId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Text = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comment_Ads_AdId",
+                        column: x => x.AdId,
+                        principalTable: "Ads",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comment_Users_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AdFavorite_AdId",
                 table: "AdFavorite",
@@ -143,6 +172,16 @@ namespace API.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comment_AdId",
+                table: "Comment",
+                column: "AdId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_AuthorId",
+                table: "Comment",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserPhotos_AppUserId",
                 table: "UserPhotos",
                 column: "AppUserId");
@@ -156,6 +195,9 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "AdPhotos");
+
+            migrationBuilder.DropTable(
+                name: "Comment");
 
             migrationBuilder.DropTable(
                 name: "UserPhotos");

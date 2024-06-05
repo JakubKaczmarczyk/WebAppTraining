@@ -115,4 +115,16 @@ public class AdRepository : IAdRepository
 
         return favAdsDto;
     }
+
+    public async void  DeleteAd(Ad adarg) {
+        var ad = await _context.Ads
+               .Where(ad => ad.Id == adarg.Id)
+               .Include(a => a.Comments)
+               .SingleOrDefaultAsync();
+        if (ad == null) {
+            return;
+        }
+        _context.Ads.Remove(ad);
+    }
+
 }

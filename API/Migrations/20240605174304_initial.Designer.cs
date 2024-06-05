@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240604180224_adComments")]
-    partial class adComments
+    [Migration("20240605174304_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,12 +100,6 @@ namespace API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("City")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
@@ -113,6 +107,9 @@ namespace API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Gender")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HomeNr")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Interests")
@@ -135,6 +132,9 @@ namespace API.Migrations
 
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("BLOB");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("UserName")
                         .IsRequired()

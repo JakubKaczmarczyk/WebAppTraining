@@ -11,6 +11,7 @@ import { MembersService } from '../../_services/members.service';
 import { AdsService } from '../../_services/ads.service';
 import { ToastrService } from 'ngx-toastr';
 import { Member } from '../../_models/member';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-ad-upload',
@@ -19,7 +20,8 @@ import { Member } from '../../_models/member';
     CommonModule, 
     TabsModule, 
     GalleryModule, 
-    FormsModule],
+    FormsModule,
+    RouterModule],
   templateUrl: './ad-upload.component.html',
   styleUrl: './ad-upload.component.css'
 })
@@ -38,7 +40,8 @@ export class AdUploadComponent implements OnInit {
       private accountService: AccountService, 
       private memberService: MembersService,
       private adsService: AdsService,
-      private toastr: ToastrService) {
+      private toastr: ToastrService,
+      private router: Router) {
       this.accountService.currentUser$.pipe(take(1)).subscribe({
         next: user => this.user = user
       })
@@ -58,9 +61,12 @@ export class AdUploadComponent implements OnInit {
     UploadAd() {
       this.ad.userId = this.member?.id;
       this.adsService.uploadAd(this.ad).subscribe({
-        next: _ => {
+        next: newAd => {
           this.toastr.success('Advert uploaded succesfully');
           this.editForm?.reset(this.ad);
+          console.log("time to route to: ")
+          console.log(newAd.id)
+          this.router.navigate(['/ads/edit', newAd.id]);
         }
       })
     }

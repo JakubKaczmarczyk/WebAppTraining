@@ -55,11 +55,15 @@ public class AdsController : BaseApiController
             AppUserId = adDto.UserId,
             Created = DateTime.UtcNow,
             Title = adDto.Title,
-            Description = adDto.Description
+            Description = adDto.Description,
+            Street = adDto.Street,
+            HomeNr = adDto.HomeNr
         };
 
         _adRepository.uploadAd(newAd);
-        if (await _adRepository.SaveAllAsync()) return NoContent();
+        if (await _adRepository.SaveAllAsync()) return 
+            CreatedAtAction(nameof(UploadAd), new {id = newAd.Id},
+            _mapper.Map<AdDto>(newAd));
 
         return BadRequest("Failed to upload new Ad");
     }
@@ -76,6 +80,23 @@ public class AdsController : BaseApiController
         if (await _adRepository.SaveAllAsync()) return NoContent();
 
         return BadRequest("Failed to update ad");
+    }
+
+    [HttpPut("deleteAd/{id}")]
+    public async Task<ActionResult> DeleteAd(int id)
+    {
+        var ad = await _adRepository.GetAdByIdAsync(id);
+        
+        if (ad == null) return NotFound("Ad not found");
+
+        var author = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+        if (ad.AppUserId != author.Id) return BadRequest();
+
+        _adRepository.DeleteAd(ad);
+
+        if (await _adRepository.SaveAllAsync()) return Ok();
+
+        return BadRequest("Problem deleting ad");
     }
 
     [HttpPost("like/{id}/{username}")] // POST: api/ads/like/1/johnDoe

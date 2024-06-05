@@ -97,12 +97,6 @@ namespace API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("City")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
@@ -110,6 +104,9 @@ namespace API.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Gender")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HomeNr")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Interests")
@@ -132,6 +129,9 @@ namespace API.Migrations
 
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("BLOB");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("UserName")
                         .IsRequired()
