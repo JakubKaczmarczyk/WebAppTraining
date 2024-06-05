@@ -17,4 +17,5 @@ public interface IAdRepository
     Task<AdDto> GetAdAsync(int id);
     void uploadAd(Ad ad);
     void likeAd(AdDto ad, string username);
+    void DeleteAd(Ad ad);
 }

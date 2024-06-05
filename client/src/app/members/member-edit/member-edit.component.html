@@ -14,7 +14,7 @@
             <div class="card-body">
                 <div>
                     <strong>Location:</strong>
-                    <p>{{member.city}}, {{member.country}}</p>
+                    <p>{{member.street}}, {{member.homeNr}}</p>
                 </div>
                 <div>
                     <strong>Age:</strong>
@@ -65,10 +65,10 @@
                     </textarea>
                     <h4 class="mt-2">Location details</h4>
                     <div class="d-flex flex-row align-items-center">
-                        <label for="city">City:</label>
-                        <input type="text" [(ngModel)]="member.city" name="city" class="form-control mx-2">
-                        <label for="Country">Country:</label>
-                        <input type="text" [(ngModel)]="member.country" name="country" class="form-control mx-2">
+                        <label for="street">Street:</label>
+                        <input type="text" [(ngModel)]="member.street" name="city" class="form-control mx-2">
+                        <label for="homeNr">Home Number:</label>
+                        <input type="text" [(ngModel)]="member.homeNr" name="country" class="form-control mx-2">
                     </div>
                 </form>
             </tab>

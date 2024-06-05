@@ -5,6 +5,9 @@
             <li class="list-inline-item">
                 <button routerLink="/ads/edit/{{ad.id}}" class="btn btn-primary"><i class="fa fa-cog"></i></button>
             </li>
+            <li class="list-inline-item">
+                <button class="btn btn-primary" (click)="deleteAd()"><i class="fa fa-trash"></i></button>
+            </li>
         </ul>
     </div>
     <div class="card-body p-1">
@@ -12,6 +15,6 @@
             <i class="fa fa-user me-2"></i>
             {{ad.title}}
         </h6>
-        <p class="card-text text-muted text-center">{{ad.title}}</p>
+        <p class="card-text text-muted text-center">{{ad.street}}</p>
     </div>
 </div>

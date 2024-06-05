@@ -40,13 +40,29 @@ export class AdsService {
   }
 
   uploadAd(ad: Ad) {
-    return this.http.post(this.baseUrl + 'ads/uploadAd', ad).pipe(
-      map(() => {
+    return this.http.post<Ad>(this.baseUrl + 'ads/uploadAd', ad).pipe(
+      map((response: Ad) => {
         const index = this.ads.indexOf(ad);
         this.ads[index] = {...this.ads[index], ...ad}
+        const newAd = response;
+        return newAd;
       })
     )
+  }
 
+  deleteAd(ad: Ad) {
+    console.log("inside service, ad to delete id is:");
+    console.log(ad.id);
+    const url = `${this.baseUrl}ads/deleteAd/${ad.id}`;
+    return this.http.put(url, {}).pipe(
+      map( () => {
+        console.log("sent delete!");
+        const index = this.ads.findIndex((a) => a.id === ad.id);
+        if (index !== -1) {
+          this.ads.splice(index, 1);
+        }
+      })
+    )
   }
 
   likeAd(ad: Ad, username: string) {

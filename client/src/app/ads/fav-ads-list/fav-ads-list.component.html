@@ -1,5 +1,13 @@
-<div class="row">
-    <div class="col-2" *ngFor="let ad of ads$ | async">
-        <app-ad-card [ad]="ad"></app-ad-card>
+<div *ngIf="(ads && ads.length > 0); else noAds">
+    <div class="row">
+        <div class="col-2" *ngFor="let ad of ads">
+            <app-fav-ad-card [ad]="ad" (adLiked)="onAdLiked($event)"></app-fav-ad-card>
+        </div>
     </div>
 </div>
+<ng-template #noAds>
+    <div class="no-ads-message text-center mt-5">
+        <p class="lead">Browse adverts to find your favourite!</p>
+        <button class="btn btn-success" routerLink="/ads">Find adverts</button>
+    </div>
+</ng-template>

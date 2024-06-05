@@ -2,23 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { Ad } from '../../_models/ad';
 import { AdsService } from '../../_services/ads.service';
 import { CommonModule } from '@angular/common';
-import { Observable, take } from 'rxjs';
+import { Observable, of, take } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { MembersService } from '../../_services/members.service';
 import { Member } from '../../_models/member';
 import { User } from '../../_models/user';
 import { AccountService } from '../../_services/account.service';
-import { AdCardComponent } from '../ad-card/ad-card.component';
+import { FavAdCardComponent } from '../fav-ad-card/fav-ad-card.component';
 
 @Component({
   selector: 'fav-app-ads-list',
   standalone: true,
-  imports: [CommonModule, AdCardComponent, RouterModule],
+  imports: [CommonModule, FavAdCardComponent, RouterModule],
   templateUrl: './fav-ads-list.component.html',
   styleUrl: './fav-ads-list.component.css'
 })
 export class FavAdsListComponent implements OnInit {
-  ads$: Observable<Ad[]> | undefined;
+  ads:Ad[] = [];
   member: Member | null = null;
   user: User | null =null;
 
@@ -47,12 +47,13 @@ export class FavAdsListComponent implements OnInit {
 
   loadFavAds() {
     if (this.member) {
-      this.ads$ = this.memberService.getUserFavAds(this.member.id);
+      this.memberService.getUserFavAds(this.member.id).subscribe({
+        next: ads => this.ads = ads
+      });
     }
   }
+
+  onAdLiked(ad: Ad) {
+    this.ads = this.ads.filter(a => a.id !== ad.id);
+  }
 }
-
-
-
-
-
