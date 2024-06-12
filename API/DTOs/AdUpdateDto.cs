@@ -7,5 +7,6 @@ namespace API.DTOs
         public string Description { get; set; }
         public string Street { get; set; }
         public string HomeNr { get; set; }
+        public string PhoneNr { get; set; }
     }
 }

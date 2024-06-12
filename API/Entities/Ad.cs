@@ -17,6 +17,7 @@ public class Ad
     public string Description { get; set; }
     public string Street { get; set; }
     public string HomeNr { get; set; }
+    public string PhoneNr { get; set; }
     public List<AdPhoto> Photos { get; set; } = new List<AdPhoto>();
     public List<AdFavorite> Favorites { get; set; }
     public List<Comment> Comments { get; set; }
