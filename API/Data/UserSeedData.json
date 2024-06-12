@@ -23,6 +23,7 @@
                 "Description": "lorem ipsum1",
                 "Street": "Piltza",
                 "HomeNr": "5",
+                "PhoneNr": "123456789",
                 "Photos": [
                     {
                         "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717254612/da-net7u/ohlhckkj4epphejya3s0.webp",
@@ -63,6 +64,7 @@
                 "Description": "lorem ipsum2",
                 "Street": "Kobierzyńska",
                 "HomeNr": "26",
+                "PhoneNr": "123456789",
                 "Photos": [
                     {
                         "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717255249/da-net7u/bndjrjktp3hj95ehnjb5.png",
@@ -104,6 +106,7 @@
                 "Description": "lorem ipsum3",
                 "Street": "Dębowa",
                 "HomeNr": "235",
+                "PhoneNr": "123456789",
                 "Photos": [
                     {
                         "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717255609/da-net7u/kcklga7uu79dxilkjjof.png",
@@ -123,6 +126,7 @@
                 "Description": "lorem ipsum4",
                 "Street": "Dębowa",
                 "HomeNr": "235",
+                "PhoneNr": "123456789",
                 "Photos": [
                     {
                         "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717255611/da-net7u/vjtfjfqgsamgli1nd5cr.png",
@@ -164,6 +168,7 @@
                 "Description": "lorem ipsum5",
                 "Street": "Klonowa",
                 "HomeNr": "76",
+                "PhoneNr": "123456789",
                 "Photos": [
                     {
                         "Url": "https://res.cloudinary.com/dmyy5hwhw/image/upload/v1717255614/da-net7u/hrkrioeeljjcqxbj7qao.png",

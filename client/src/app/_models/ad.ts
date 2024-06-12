@@ -10,6 +10,7 @@ export interface Ad {
     description: string;
     street: string;
     homeNr: string;
+    phoneNr: string;
     photos: Photo[];
     comments: Comment[];
 }

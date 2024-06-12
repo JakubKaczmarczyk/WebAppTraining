@@ -57,7 +57,8 @@ public class AdsController : BaseApiController
             Title = adDto.Title,
             Description = adDto.Description,
             Street = adDto.Street,
-            HomeNr = adDto.HomeNr
+            HomeNr = adDto.HomeNr,
+            PhoneNr = adDto.PhoneNr
         };
 
         _adRepository.uploadAd(newAd);
