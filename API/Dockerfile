@@ -1,7 +1,7 @@
 # Użycie oficjalnego obrazu .NET SDK do budowania aplikacji
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
-
+ENV ASPNETCORE_ENVIRONMENT=Development
 # Instalacja mkcert i OpenSSL
 RUN apt-get update && apt-get install -y curl libnss3-tools openssl && \
     curl -JLO https://github.com/FiloSottile/mkcert/releases/download/v1.4.4/mkcert-v1.4.4-linux-amd64 && \

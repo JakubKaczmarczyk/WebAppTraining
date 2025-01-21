@@ -8,8 +8,14 @@ using System;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting;
 
-
 var builder = WebApplication.CreateBuilder(args);
+
+var cloudinarySettings = new
+{
+    ApiKey = Environment.GetEnvironmentVariable("CLOUDINARY_API_KEY"),
+    ApiSecret = Environment.GetEnvironmentVariable("CLOUDINARY_API_SECRET"),
+    CloudName = Environment.GetEnvironmentVariable("CLOUDINARY_CLOUD_NAME")
+};
 
 // Configure Kestrel to listen on all network interfaces and specific ports
 builder.WebHost.ConfigureKestrel(options =>
@@ -23,14 +29,26 @@ builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddAuthorization();
+builder.Services.AddSingleton(cloudinarySettings);
+
+// Configure CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("https://localhost:4200", "http://client:4200") // Upewnij się, że "client" to nazwa usługi frontendu
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
 // Middleware
 app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod()
-    .WithOrigins("https://localhost:4200"));
+// Enable CORS
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();
