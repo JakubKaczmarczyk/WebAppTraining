@@ -22,7 +22,12 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IAdRepository, AdRepository>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-        services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+        services.Configure<CloudinarySettings>(options =>
+            {
+                options.CloudName = Environment.GetEnvironmentVariable("CLOUDINARY_CLOUD_NAME");
+                options.ApiKey = Environment.GetEnvironmentVariable("CLOUDINARY_API_KEY");
+                options.ApiSecret = Environment.GetEnvironmentVariable("CLOUDINARY_API_SECRET");
+            });
         services.AddScoped<IPhotoService, PhotoService>();
 
         return services;
