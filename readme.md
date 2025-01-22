@@ -11,6 +11,25 @@ Aby uruchomić projekt, upewnij się, że masz zainstalowane następujące narz�
 
 ---
 
+## Konfiguracja przed uruchomieniem
+
+1. Zdobądź klucze API potrzebne do korzystania z Cloudinary:
+   - **CLOUDINARY_API_KEY**: Twój klucz API.
+   - **CLOUDINARY_API_SECRET**: Twój sekretny klucz API.
+   - **CLOUDINARY_CLOUD_NAME**: Nazwa Twojego konta w Cloudinary.
+
+2. Zaktualizuj plik `docker-compose.yml` w sekcji `api`, wstawiając zdobyte dane do zmiennych środowiskowych:
+   ```yaml
+   services:
+     api:
+       environment:
+         - CLOUDINARY_API_KEY=your-api-key
+         - CLOUDINARY_API_SECRET=your-api-secret
+         - CLOUDINARY_CLOUD_NAME=your-cloud-name
+   ```
+
+---
+
 ## Uruchamianie aplikacji
 
 ### Uruchamianie za pomocą Docker Compose
@@ -27,10 +46,3 @@ Aby uruchomić projekt, upewnij się, że masz zainstalowane następujące narz�
    ```bash
    docker-compose down
    ```
-
----
-
-## Notes
-- Certyfikaty SSL są generowane wewnątrz kontenerów i nie wymagają dodatkowej konfiguracji.
-- Upewnij się, że Docker jest uruchomiony przed próbą uruchomienia kontenerów.
-
