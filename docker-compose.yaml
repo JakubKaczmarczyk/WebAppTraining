@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  api:
+    image: api:latest
+    build:
+      context: ./API
+    environment:
+      - CLOUDINARY_API_KEY=
+      - CLOUDINARY_API_SECRET=
+      - CLOUDINARY_CLOUD_NAME=
+    volumes:
+      - db_data:/app/Data
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+
+  client:
+    image: client:latest
+    build:
+      context: ./client
+    ports:
+      - "4200:4200"
+
+volumes:
+  db_data:
